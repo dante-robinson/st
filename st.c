@@ -1579,12 +1579,6 @@ tsetattr(const int *attr, int l)
 			term.c.attr.bg = defaultbg;
 			break;
 		case 58:
-			/* This starts a sequence to change the color of
-			 * "underline" pixels. We don't support that and
-			 * instead eat up a following "5;n" or "2;r;g;b". */
-			tdefcolor(attr, &i, l);
-			break;
-		case 58:
 			term.c.attr.ucolor[0] = csiescseq.carg[i][1];
 			term.c.attr.ucolor[1] = csiescseq.carg[i][2];
 			term.c.attr.ucolor[2] = csiescseq.carg[i][3];
