@@ -1314,22 +1314,19 @@ tsetchar(Rune u, const Glyph *attr, int x, int y)
 			line[x+1].u = ' ';
 			line[x+1].mode &= ~ATTR_WDUMMY;
 		}
-<<<<<<< ours
-	} else if (term.line[y][x].mode & ATTR_WDUMMY) {
-		if (x > 0) {
-			term.line[y][x-1].u = ' ';
-			term.line[y][x-1].mode &= ~ATTR_WIDE;
-		}
-=======
 	} else if (line[x].mode & ATTR_WDUMMY) {
-		line[x-1].u = ' ';
-		line[x-1].mode &= ~ATTR_WIDE;
->>>>>>> theirs
+		if (x > 0) {
+			line[x-1].u = ' ';
+			line[x-1].mode &= ~ATTR_WIDE;
+		}
 	}
 
 	term.dirty[y] = 1;
 	line[x] = *attr;
 	line[x].u = u;
+
+	if (isboxdraw(u))
+		line[x].mode |= ATTR_BOXDRAW;
 }
 
 void
@@ -2818,21 +2815,16 @@ draw(void)
 	/* adjust cursor position */
 	LIMIT(term.ocx, 0, term.col-1);
 	LIMIT(term.ocy, 0, term.row-1);
-<<<<<<< ours
-	if (term.ocx > 0 && (term.line[term.ocy][term.ocx].mode & ATTR_WDUMMY))
-		term.ocx--;
-	if (cx > 0 && (term.line[term.c.y][cx].mode & ATTR_WDUMMY))
-=======
 	if (TLINE(term.ocy)[term.ocx].mode & ATTR_WDUMMY)
 		term.ocx--;
 	if (TLINE(term.c.y)[cx].mode & ATTR_WDUMMY)
->>>>>>> theirs
 		cx--;
-
+	
 	drawregion(0, 0, term.col, term.row);
 	if (TSCREEN.off == 0)
 		xdrawcursor(cx, term.c.y, TLINE(term.c.y)[cx],
-				term.ocx, term.ocy, TLINE(term.ocy)[term.ocx]);
+				term.ocx, term.ocy, TLINE(term.ocy)[term.ocx],
+				TLINE(term.ocy), term.col);
 	term.ocx = cx;
 	term.ocy = term.c.y;
 	xfinishdraw();
