@@ -5,11 +5,10 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "JetBrains Mono:pixelsize=12:antialias=true:autohint=true";
 /* Spare fonts */
 static char *font2[] = {
-/*	"Inconsolata for Powerline:pixelsize=12:antialias=true:autohint=true", */
-/*	"Hack Nerd Font Mono:pixelsize=11:antialias=true:autohint=true", */
+	"Symbols Nerd Font Mono:pixelsize=10:antialias=true:autohint=true",
 };
 
 static int borderpx = 2;
@@ -114,32 +113,32 @@ unsigned int tabspaces = 8; /* must be > 0 */
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+	"#342F31", /* black	*/
+	"#B83A4A", /* red 	*/  
+	"#909870", /* green	*/
+	"#B89878", /* yellow	*/
+	"#8A9698", /* blue	*/
+	"#C4634A", /* magenta	*/
+	"#7A9E92", /* cyan	*/
+	"#CCCACC", /* white	*/
 
 	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+	"#888088", /* black	*/
+	"#D44040", /* red	*/
+	"#A8AE88", /* green	*/
+	"#CDB394", /* yellow	*/
+	"#A3ADAF", /* blue	*/
+	"#D98068", /* magenta	*/
+	"#95B5AA", /* cyan	*/
+	"#EAE2E3", /* white	*/
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
-	"gray90", /* default foreground colour */
-	"black", /* default background colour */
+	"#BB3A4A", /* 256: cursor		*/
+	"#201C1D", /* 257: reverse cursor	*/
+	"#EAE2E3", /* 258: foreground 		*/
+	"#201C1D", /* 259: background 		*/
 };
 
 
@@ -197,6 +196,7 @@ static MouseShortcut mshortcuts[] = {
 	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = 1},		0, /* !alt */ -1 },
 	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = 1},		0, /* !alt */ -1 },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
+	{ XK_ANY_MOD,		Button3, selpaste,	 {.i = 0},	1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
 	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
